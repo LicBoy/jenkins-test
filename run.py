@@ -9,3 +9,5 @@ param3 = os.environ.get('long string')
 print("Parameter 1:", param1)
 print("Parameter 2:", param2)
 print("Parameter 3:", param3)
+
+print(os.environ)
