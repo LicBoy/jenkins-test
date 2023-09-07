@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    
+    parameters {
+        string(name: 'NUM_THREADS', defaultValue: '8', description: 'Num of threads')
+        booleanParam(name: 'BOOL_PARAM_1', defaultValue: true, description: 'Descr BOOL_PARAM_1')
+        booleanParam(name: 'BOOL_PARAM_2', defaultValue: true, description: 'Descr BOOL_PARAM_2')
+        choice(name: 'FRUIT', choices: ['Apple', 'Banana', 'Orange'], description: 'Select your favorite fruit')
+    }
+
+    stages {
+        stage('Example Stage') {
+            steps {
+                script {
+                    def num_threads_param = params.NUM_THREADS
+                    def bool1_param = params.BOOL_PARAM_1
+                    def bool2_param = params.BOOL_PARAM_2
+                    def choice_param = params.FRUIT
+
+                    echo "PARAM1: ${num_threads_param}"
+                    echo "PARAM2: ${bool1_param}"
+                    echo "PARAM3: ${bool2_param}"
+                    echo "PARAM4: ${choice_param}"
+
+                    // Now you can use param1Value, param2Value, and param3Value in your pipeline script
+                }
+            }
+        }
+
+        stage('run tests') {
+            steps {
+                bat "python run.py"
+            }
+        }
+
+    }
+}
